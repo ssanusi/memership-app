@@ -1,13 +1,36 @@
-'use strict';
+"use strict";
+
+const membershipTypes = Object.freeze({
+  limited: "limited",
+  unlimited: "unlimited"
+});
 module.exports = (sequelize, DataTypes) => {
-  const Plan = sequelize.define('plan', {
-    membershipName: DataTypes.STRING,
-    membershipStartDate:DataTypes.DATE,
-    membershipStartDate:DataTypes.DATE
-  }, {});
+  const Plan = sequelize.define(
+    "plan",
+    {
+      membershipName: DataTypes.STRING,
+      membershipType: {
+        type: DataTypes.ENUM,
+        values: [membershipTypes.unlimited, membershipTypes.limited]
+      },
+      membershipStartDate: DataTypes.DATE,
+      membershipEndDate: DataTypes.DATE
+    },
+    {
+      hooks: {
+        beforeCreate: (plan, options) => {
+          plan.membershipEndDate =
+            plan.membershipType === membershipTypes.unlimited
+              ? null
+              : plan.membershipEndDate;
+        }
+      }
+    }
+  );
   Plan.associate = function(models) {
     // associations can be defined here
-    Plan.belongsTo(models.USER)
+    Plan.belongsTo(models.user);
   };
-  return plan;
+
+  return Plan;
 };

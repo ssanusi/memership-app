@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       lastName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       dob: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull : false
       },
       createdAt: {
         allowNull: false,
