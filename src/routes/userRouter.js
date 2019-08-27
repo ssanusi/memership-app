@@ -1,11 +1,11 @@
 const express = require('express');
 const controllers = require('../controllers');
-
+const validators = require('../middleware');
 
 const userRouter = express.Router();
 
 userRouter
-     .post('/', controllers.createUser)
+     .post('/', validators.validateUserData, controllers.createUser)
 
 
 
