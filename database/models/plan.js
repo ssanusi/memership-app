@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   Plan.associate = function(models) {
     // associations can be defined here
-    Plan.belongsTo(models.user);
+    Plan.belongsTo(models.user, {
+      foreignKey : "userId",
+      as : 'user'
+    });
   };
 
   return Plan;

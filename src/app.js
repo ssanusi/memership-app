@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const logger =  require('morgan');
 const bodyParser = require('body-parser');
-const userRouter = require('./routes/userRoute')
-const planRouter = require('./routes/planRouter')
+const rootRouter = require('./routes')
+
 
 const app = express();
 
@@ -14,8 +14,8 @@ app.use(express.json());
 app.use(logger('dev'));
 
 
-app.use('/user', userRouter)
-app.use('/plan', planRouter)
+app.use('/api/v1', rootRouter)
+
 
 
 app.get('/*', (req, res) => {

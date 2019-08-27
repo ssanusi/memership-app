@@ -1,11 +1,11 @@
 const express = require('express');
-const PlanControllers = require('../controllers/planControllers');
+const controllers = require('../controllers');
 
 
 const planRouter = express.Router();
 
 planRouter
-      .post('/', PlanControllers.createPlan);
+      .post('/', controllers.createPlan);
 
 
 
